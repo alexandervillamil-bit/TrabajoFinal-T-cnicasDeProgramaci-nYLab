@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ventas</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="container mt-4">
+
+<h2>Ventas</h2>
+
+<!-- MENSAJES -->
+<div th:if="${mensajeExito}" class="alert alert-success">
+    <span th:text="${mensajeExito}"></span>
+</div>
+
+<div th:if="${mensajeError}" class="alert alert-danger">
+    <span th:text="${mensajeError}"></span>
+</div>
+
+<!-- BOTÓN NUEVA VENTA -->
+<a class="btn btn-primary mb-3" th:href="@{/ventas/nuevo}">
+    Nueva Venta
+</a>
+
+<!-- TABLA -->
+<table class="table table-bordered table-hover">
+
+    <thead class="table-dark">
+    <tr>
+        <th>ID</th>
+        <th>Cliente</th>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Fecha</th>
+        <th>Total</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="v : ${ventas}">
+        <td th:text="${v.id}"></td>
+
+        <td th:text="${v.cliente != null ? v.cliente.nombre : ''}"></td>
+
+        <td th:text="${v.producto != null ? v.producto.nombre : ''}"></td>
+
+        <td th:text="${v.cantidad}"></td>
+
+        <td th:text="${v.fecha}"></td>
+
+        <td th:text="${v.total}"></td>
+
+        <td th:text="${v.estado}"></td>
+
+        <td>
+            <a class="btn btn-danger btn-sm"
+               th:href="@{'/ventas/eliminar/' + ${v.id}}">
+                Eliminar
+            </a>
+        </td>
+    </tr>
+    </tbody>
+
+</table>
+
+</body>
+</html>
